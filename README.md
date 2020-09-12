@@ -1,3 +1,5 @@
+The project is deployed in [Netlify](https://todolist-mern.netlify.app/) Check it out!
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
