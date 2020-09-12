@@ -1,7 +1,6 @@
 {
   "name": "todo-app-react",
   "version": "0.1.0",
-  "homepage": "http://nirmal1064.github.io/todo-app-react",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
