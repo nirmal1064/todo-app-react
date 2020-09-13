@@ -9,6 +9,14 @@ class TodoService {
         return http.get(`/todo/${id}`);
     }
 
+    getCompleted() {
+        return http.get('/todo/completed');
+    }
+
+    getIncomplete() {
+        return http.get('/todo/incomplete');
+    }
+
     create(data) {
         return http.post("/todo", data);
     }
