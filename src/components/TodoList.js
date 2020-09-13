@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TodoService from "../services/TodoService";
 import { Link } from "react-router-dom";
+import DropdownComponent from "./DropdownComponent";
 
 class TodoList extends Component {
     constructor(props) {
@@ -13,12 +14,16 @@ class TodoList extends Component {
         this.removeAllTodos = this.removeAllTodos.bind(this);
         this.searchTitle = this.searchTitle.bind(this);
         this.updateStatus = this.updateStatus.bind(this);
+        this.handleDropdown = this.handleDropdown.bind(this);
+        this.findCompleted = this.findCompleted.bind(this);
+        this.findIncomplete = this.findIncomplete.bind(this);
 
         this.state = {
             todos: [],
             currentTodo: null,
             currentIndex: -1,
-            searchTitle: ""
+            searchTitle: "",
+            selected: ""
         };
     }
 
@@ -28,7 +33,6 @@ class TodoList extends Component {
 
     onChangeSearchTitle(e) {
         const searchTitle = e.target.value;
-
         this.setState({
             searchTitle: searchTitle
         });
@@ -108,6 +112,44 @@ class TodoList extends Component {
         });
     }
 
+    findCompleted() {
+        TodoService.getCompleted().then(response => {
+            this.setState({
+                todos: response.data
+            });
+            console.log(response.data);
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    findIncomplete() {
+        TodoService.getIncomplete().then(response => {
+            this.setState({
+                todos: response.data
+            });
+            console.log(response.data);
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    handleDropdown(value) {
+        if (this.state.selected !== value) {
+            this.setState({
+                selected: value
+            }, () => {
+                if (this.state.selected === 'All') {
+                    this.refreshList();
+                } else if (this.state.selected === 'Completed') {
+                    this.findCompleted();
+                } else {
+                    this.findIncomplete();
+                }
+            });
+        }
+    }
+
     render() {
         const { searchTitle, todos, currentTodo, currentIndex } = this.state;
 
@@ -134,8 +176,8 @@ class TodoList extends Component {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <h4>Todos List</h4>
-
+                    <DropdownComponent handleDropdown={this.handleDropdown}/>
+                    <p></p>
                     <ul className="list-group">
                         {todos &&
                         todos.map((todo, index) => (
