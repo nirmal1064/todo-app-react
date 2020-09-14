@@ -1,6 +1,6 @@
 The project is deployed in [Netlify](https://todolist-mern.netlify.app/) Check it out!
 
-The backend API of this project can be found [here](https://github.com/nirmal1064/todo-api-backend)
+The backend API of this project can be found [here](https://github.com/nirmal1064/todo-rest-api)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
